@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPL Results Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-slideshow"></div>
+    <div class="content-wrapper">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-md-8">
+                    <div class="card prediction-card">
+                        <div class="card-header text-center">
+                            <h2>EPL Results Predictor</h2>
+                        </div>
+                        <div class="card-body">
+                            <form id="predictionForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="team" class="form-label">Team</label>
+                                        <select class="form-select" id="team" required>
+                                            <option value="">Select team</option>
+                                            {% for team in teams %}
+                                            <option value="{{ team }}">{{ team }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="opponent" class="form-label">Opponent</label>
+                                        <select class="form-select" id="opponent" required>
+                                            <option value="">Select opponent</option>
+                                            {% for opponent in opponents %}
+                                            <option value="{{ opponent }}">{{ opponent }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Venue</label>
+                                        <div class="venue-buttons">
+                                            <input type="radio" class="btn-check" name="venue" id="home" value="home" required>
+                                            <label class="btn btn-outline-primary" for="home">Home</label>
+                                            <input type="radio" class="btn-check" name="venue" id="away" value="away">
+                                            <label class="btn btn-outline-primary" for="away">Away</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Kickoff Time (24h)</label>
+                                        <div class="time-input-group">
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="hours" min="0" max="23" placeholder="HH" required>
+                                                <span class="input-group-text">:</span>
+                                                <input type="number" class="form-control" id="minutes" min="0" max="59" placeholder="MM" required>
+                                            </div>
+                                            <small class="form-text text-muted">Enter time in 24-hour format (e.g., 15:30)</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="day" class="form-label">Day</label>
+                                        <select class="form-select" id="day" required>
+                                            <option value="">Select day</option>
+                                            {% for day in days %}
+                                            <option value="{{ day }}">{{ day }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">Predict</button>
+                                </div>
+                            </form>
+
+                            <div id="result" class="mt-4" style="display: none;">
+                                <div class="result-card">
+                                    <h3 class="text-center mb-4">Prediction Results</h3>
+                                    <div class="probability-meter">
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                        </div>
+                                        <div class="probability-label mt-2 text-center">
+                                            Win Probability: <span id="probability">0</span>%
+                                        </div>
+                                    </div>
+                                    <div class="interpretation mt-3 text-center">
+                                        <p id="message"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/background.js') }}"></script>
+</body>
+</html> 
