@@ -3,4 +3,4 @@ pandas
 scikit-learn
 numpy
 datetime
-
+gunicorn==19.7.1
