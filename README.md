@@ -1,6 +1,6 @@
 # EPL Match Predictor
 
-Hi, this is a machine learning-based web application that predicts English Premier League match outcomes using historical data from 2020-2022 seasons.
+This is a machine learning-based web application that predicts English Premier League match outcomes using historical data from 2020-2022 seasons. Try out [Here](https://epl-match-result-predictor-3.onrender.com)
 
 ## How It Works
 
